@@ -6,6 +6,8 @@ import Rank from "../components/Rank/Rank";
 import Particles from "react-particles-js";
 import Clarifai from 'clarifai';
 import FaceRecognition from "../components/FaceRecognition/FaceRecognition";
+import SignIn from "../components/SignIn/SignIn";
+import Register from "../components/Register/Register";
 import './App.css';
 
 const app = new Clarifai.App({
@@ -32,7 +34,9 @@ class App extends Component{
             input: '', //that's the user's input
             imageUrl: '',
             // modalIsOpen: false,
-            box: [] //that's the face box array that gets sent to FaceRecognition.js
+            box: [], //that's the face box array that gets sent to FaceRecognition.js
+            route: 'signin', //keeps track of where we are in the page
+            isSignedIn: false
         };
     }
 
@@ -69,18 +73,39 @@ class App extends Component{
                 .catch(err => console.log(err)));
     };
 
+    onRouteChange = (route) => { //creating event handler...
+        if (route === 'signout') {
+            this.setState({isSignedIn: false})
+        } else if (route === 'home') {
+            this.setState({isSignedIn: true})
+        }
+        this.setState({route:route});
+    };
+
     render() {
+        const {isSignedIn, imageUrl, route, box} = this.state; //destructuring
         return (
             <div className="App">
                 <Particles className='particles'
                            params={particlesOptions} />
-                <Navigation />
-                <Logo />
-                <Rank />
-                <ImageLinkForm
-                    onInputChange={this.onInputChange}
-                    onButtonSubmit={this.onButtonSubmit}/> {/*passing onInputChange and onButtonSubmit as a prop to ImageLinkForm.js (property of the App)*/}
-                <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/> {/*passing imageUrl and box to FaceRecognition.js   */}
+                <Navigation isSignedIn={isSignedIn} route={route} onRouteChange={this.onRouteChange}/>
+                { this.state.route === 'home' //if route === signin, show signin form, else show home
+                    ?  <div>
+                        <Logo />
+                        <Rank />
+                        <ImageLinkForm
+                            onInputChange={this.onInputChange}
+                            onButtonSubmit={this.onButtonSubmit}/> {/*passing onInputChange and onButtonSubmit as a prop to ImageLinkForm.js (property of the App)*/}
+                        <FaceRecognition box={box} imageUrl={imageUrl}/> {/*passing imageUrl and box to FaceRecognition.js   */}
+                    </div>
+                    : (
+                        route === 'signin'
+                        ?
+                            <SignIn onRouteChange={this.onRouteChange}/>
+                        :
+                            <Register onRouteChange={this.onRouteChange}/>
+                    )
+                }
             </div>
         );
     }
