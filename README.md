@@ -1,4 +1,4 @@
-# SmartBrain - v1
+# face-detector
 Final project for Udemy course
 
 1. Clone this repo
