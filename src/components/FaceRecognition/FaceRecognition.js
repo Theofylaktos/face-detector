@@ -8,7 +8,7 @@ const FaceRecognition = ({imageUrl, box}) => { //getting imageUrl from App.js
     return (
         <div className='center ma'>
             <div className='absolute mt2'>
-                <img id='inputImage' alt='' src={imageUrl} style={{minWidth:'400px', width:'400px', height:'auto'}}/>
+                <img id='inputImage' alt='' src={imageUrl} style={{minWidth:'320px', width:'320px', height:'auto'}}/>
                 {faceBoxes}
             </div>
         </div>

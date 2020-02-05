@@ -89,7 +89,7 @@ class App extends Component{
                 <Particles className='particles'
                            params={particlesOptions} />
                 <Navigation isSignedIn={isSignedIn} route={route} onRouteChange={this.onRouteChange}/>
-                { this.state.route === 'home' //if route === signin, show signin form, else show home
+                { this.state.route === 'home'
                     ?  <div>
                         <Logo />
                         <Rank />
