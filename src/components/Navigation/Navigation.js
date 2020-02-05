@@ -9,9 +9,9 @@ const Navigation = ({onRouteChange, route, isSignedIn}) => {
             );} else {
             return (
                 <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    {route === 'signin'
-                    ? <p onClick={() => onRouteChange('register')} className='f3 link dim black underline pa3 pointer'>Register</p>
-                    : <p onClick={() => onRouteChange('signin')} className='f3 link dim black underline pa3 pointer'>Sign In</p>
+                    {route === 'register'
+                    ? <p onClick={() => onRouteChange('signin')} className='f3 link dim black underline pa3 pointer'>Sign In</p>
+                    : <p onClick={() => onRouteChange('register')} className='f3 link dim black underline pa3 pointer'>Register</p>
                     }
 
 
