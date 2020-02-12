@@ -1,5 +1,7 @@
 # face-detector
-Final project for Udemy course
+Final project for Udemy course | React + Node.js + Express.js + PostgreSQL + Tachyons.io
+
+Passwords get encrypted using Bcrypt.
 
 image links have to start with 'http'
 e.g.
